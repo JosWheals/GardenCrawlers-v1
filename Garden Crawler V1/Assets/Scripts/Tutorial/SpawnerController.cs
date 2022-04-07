@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.SceneManager;
+using UnityEngine.SceneManagement;//allows me to use premade commands for scenes 
 
 public class SpawnerController : MonoBehaviour
 {
@@ -9,8 +9,7 @@ public class SpawnerController : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "Player")
         {
-            scene.load()
-        }
+            SceneManager.LoadScene("Battle");//switches the scenes to the specifically called one 
+        }      
     }
-
 }

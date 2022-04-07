@@ -716,6 +716,7 @@ GameObject:
   - component: {fileID: 1304368112}
   - component: {fileID: 1304368111}
   - component: {fileID: 1304368110}
+  - component: {fileID: 1304368113}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -814,6 +815,18 @@ Transform:
   m_Father: {fileID: 1881598055}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1304368113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304368109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91cf936e75353d498c2bd787c58e60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1382882133
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +838,7 @@ GameObject:
   - component: {fileID: 1382882134}
   - component: {fileID: 1382882136}
   - component: {fileID: 1382882135}
+  - component: {fileID: 1382882137}
   m_Layer: 0
   m_Name: Door (1)
   m_TagString: Untagged
@@ -923,6 +937,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1382882137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382882133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbe659c802955b42b1d20a927ca7d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Y: 0
 --- !u!1 &1386785351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1107,7 @@ GameObject:
   - component: {fileID: 1600415509}
   - component: {fileID: 1600415511}
   - component: {fileID: 1600415510}
+  - component: {fileID: 1600415512}
   m_Layer: 0
   m_Name: Door (1)
   m_TagString: Untagged
@@ -1178,6 +1206,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1600415512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600415508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbe659c802955b42b1d20a927ca7d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Y: 10
 --- !u!1 &1798810509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1230,7 @@ GameObject:
   - component: {fileID: 1798810510}
   - component: {fileID: 1798810512}
   - component: {fileID: 1798810511}
+  - component: {fileID: 1798810513}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1287,6 +1329,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1798810513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798810509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbe659c802955b42b1d20a927ca7d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Y: 20
 --- !u!1 &1868249414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1711,7 @@ GameObject:
   - component: {fileID: 2142316877}
   - component: {fileID: 2142316878}
   - component: {fileID: 2142316879}
+  - component: {fileID: 2142316880}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1754,3 +1810,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2142316880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142316876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbe659c802955b42b1d20a927ca7d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Y: 10
