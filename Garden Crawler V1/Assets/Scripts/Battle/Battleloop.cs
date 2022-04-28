@@ -26,9 +26,13 @@ public class Battleloop : MonoBehaviour
     private int TotalDamage;
     private int turnumber;   
     private int RNG;
+    private bool next;
+    public GameObject Moves;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         RNG = Random.Range(1,4);
         //PCHealth.text = "HP: " + CurrentHealth + "/" + MaxHealth;
         if (RNG == 1)
@@ -74,6 +78,7 @@ public class Battleloop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        next = false;
         PCHealth.text = "HP:" + CurrentHealth + "/" + MaxHealth;
         EnHealth.text = "HP: " + ENCurrentHealth + "/" + EnMaxHealth;
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -96,15 +101,13 @@ public class Battleloop : MonoBehaviour
             turn(4);
             turnumber = 4;
         }
-
-        if (ENCurrentHealth <= 0)
+        if (Input.GetKeyDown("enter"))
         {
-            SceneManager.LoadScene("Tutorial Scene");
+           
+            turn(5);
         }
-        if (CurrentHealth <= 0)
-        {
-            SceneManager.LoadScene("Death");
-        }
+      
+        
     }
 
     public void turn(int move)
@@ -117,15 +120,10 @@ public class Battleloop : MonoBehaviour
             MoveTitle.text = "you use your pitchfork";
             TotalDamage = damage - Def;
             ENCurrentHealth = ENCurrentHealth - TotalDamage;
-            MoveTitle.text = (name + " uses " + Enmove);
-            CurrentHealth = CurrentHealth - damage;
-            MoveTitle.text = "";
-            GameObject.FindWithTag("Moves").SetActiveRecursively(true);
-
-
-
+            StartCoroutine(WaitBeforNext());
 
         }
+
         if (move == 2)
         {
             Debug.Log("Fertiliser");
@@ -136,16 +134,36 @@ public class Battleloop : MonoBehaviour
             {
                 CurrentHealth = CurrentHealth + heal;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                MoveTitle.text = (name + " uses " + Enmove);
-                CurrentHealth = CurrentHealth - damage;
-            }
-
-
+            StartCoroutine(WaitBeforNext());
         }
 
     }
+    public void EnTurn()
+    {
+        MoveTitle.text = (name + " uses " + Enmove);
+        CurrentHealth = CurrentHealth - damage;
+        StartCoroutine(WaitBeforloop());
 
-    
+    }
+    public void LoopTurn()
+    {
+        MoveTitle.text = ("");
+        Moves.SetActive(true);
+    }
+    IEnumerator WaitBeforNext()
+    {
+        yield return new WaitForSeconds(1);
+        EnTurn();
+    }
+
+    IEnumerator WaitBeforloop()
+    {
+        yield return new WaitForSeconds(1);
+        LoopTurn();
+    }
+    public void death()
+    {
+        
+    }
+
 }

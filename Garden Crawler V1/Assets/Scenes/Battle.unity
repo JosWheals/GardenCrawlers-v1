@@ -835,6 +835,7 @@ MonoBehaviour:
   EnTitle: {fileID: 1886397679}
   MoveTitle: {fileID: 1514122119}
   MaxHealth: 30
+  Moves: {fileID: 2133434723}
 --- !u!1 &931404454
 GameObject:
   m_ObjectHideFlags: 0
