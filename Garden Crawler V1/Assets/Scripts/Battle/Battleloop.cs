@@ -24,7 +24,7 @@ public class Battleloop : MonoBehaviour
     private int EnSpeed;
     private int heal;
     private int TotalDamage;
-    private int turnumber;   
+    private int turnumber;
     private int RNG;
     private bool next;
     public GameObject Moves;
@@ -32,8 +32,8 @@ public class Battleloop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        RNG = Random.Range(1,4);
+
+        RNG = Random.Range(1, 4);
         //PCHealth.text = "HP: " + CurrentHealth + "/" + MaxHealth;
         if (RNG == 1)
         {
@@ -43,9 +43,9 @@ public class Battleloop : MonoBehaviour
             Def = 8;
             Enmove = "Barrage";
             EnDamage = 6;
-            EnSpeed = 3; 
+            EnSpeed = 3;
         }
-            
+
 
         if (RNG == 2)
         {
@@ -56,9 +56,9 @@ public class Battleloop : MonoBehaviour
             Enmove = "Bad Breath";
             EnDamage = 3;
             EnSpeed = 3;
-                      
+
         }
-           
+
 
         if (RNG == 3)
         {
@@ -68,11 +68,12 @@ public class Battleloop : MonoBehaviour
             Def = 5;
             Enmove = "Head Butt";
             EnDamage = 5;
-            EnSpeed = 10;                      
+            EnSpeed = 10;
         }
+
         CurrentHealth = MaxHealth;
-        ENCurrentHealth = EnMaxHealth;    
-  
+        ENCurrentHealth = EnMaxHealth;
+
     }
 
     // Update is called once per frame
@@ -103,11 +104,22 @@ public class Battleloop : MonoBehaviour
         }
         if (Input.GetKeyDown("enter"))
         {
-           
+
             turn(5);
         }
-      
-        
+        if (CurrentHealth < 0)
+        {
+            CurrentHealth = 0;
+            MoveTitle.text = name + " killed you... you died.";
+            StartCoroutine(WaitBeforDeath());
+        }
+        if (ENCurrentHealth < 0)
+        {
+            ENCurrentHealth = 0;
+            MoveTitle.text = "You killed " + name + " you survived!!";
+            StartCoroutine(WaitBeforENDeath());
+        }
+
     }
 
     public void turn(int move)
@@ -120,7 +132,17 @@ public class Battleloop : MonoBehaviour
             MoveTitle.text = "you use your pitchfork";
             TotalDamage = damage - Def;
             ENCurrentHealth = ENCurrentHealth - TotalDamage;
-            StartCoroutine(WaitBeforNext());
+            if (ENCurrentHealth <= 0)
+            {
+                ENCurrentHealth = 0;
+                MoveTitle.text = "You killed " + name + " you survived!!";
+                StartCoroutine(WaitBeforENDeath());
+            }
+            else
+            {
+                StartCoroutine(WaitBeforNext());
+            }
+
 
         }
 
@@ -137,33 +159,89 @@ public class Battleloop : MonoBehaviour
             StartCoroutine(WaitBeforNext());
         }
 
-    }
-    public void EnTurn()
-    {
-        MoveTitle.text = (name + " uses " + Enmove);
-        CurrentHealth = CurrentHealth - damage;
-        StartCoroutine(WaitBeforloop());
+        if (move == 3)
+        {
+            Debug.Log("Pesticide");
+            damage = 15;
+            GameObject.FindWithTag("Moves").SetActiveRecursively(false);
+            MoveTitle.text = "you use your Pesticide";
+            TotalDamage = damage;
+            ENCurrentHealth = ENCurrentHealth - TotalDamage;
+            if (ENCurrentHealth <= 0)
+            {
+                ENCurrentHealth = 0;
+                MoveTitle.text = "You killed " + name + " you survived!!";
+                StartCoroutine(WaitBeforENDeath());
+            }
+            else
+            {
+                StartCoroutine(WaitBeforNext());
+            }
+        }
 
-    }
-    public void LoopTurn()
-    {
-        MoveTitle.text = ("");
-        Moves.SetActive(true);
-    }
-    IEnumerator WaitBeforNext()
-    {
-        yield return new WaitForSeconds(1);
-        EnTurn();
-    }
+        if (move == 4)
+        {
+            Debug.Log("Punch");
+            damage = 20;
+            GameObject.FindWithTag("Moves").SetActiveRecursively(false);
+            MoveTitle.text = "you use your fist to punch them";
+            TotalDamage = damage - Def;
+            ENCurrentHealth = ENCurrentHealth - TotalDamage;
+            if (ENCurrentHealth <= 0)
+            {
+                ENCurrentHealth = 0;
+                MoveTitle.text = "You killed " + name + " you survived!!";
+                StartCoroutine(WaitBeforENDeath());
+            }
+            else
+            {
+                StartCoroutine(WaitBeforNext());
+            }
 
-    IEnumerator WaitBeforloop()
-    {
-        yield return new WaitForSeconds(1);
-        LoopTurn();
+        }
     }
-    public void death()
-    {
-        
-    }
+        void EnTurn()
+        {
+            MoveTitle.text = (name + " uses " + Enmove);
+            CurrentHealth = CurrentHealth - damage;
+            StartCoroutine(WaitBeforloop());
 
-}
+        }
+        void LoopTurn()
+        {
+
+            Moves.SetActive(true);
+        }
+        IEnumerator WaitBeforNext()
+        {
+            yield return new WaitForSeconds(1);
+            EnTurn();
+        }
+
+        IEnumerator WaitBeforloop()
+        {
+            yield return new WaitForSeconds(1);
+            LoopTurn();
+        }
+        IEnumerator WaitBeforDeath()
+        {
+            yield return new WaitForSeconds(2);
+            death();
+        }
+        IEnumerator WaitBeforENDeath()
+        {
+            yield return new WaitForSeconds(2);
+            Endeath();
+        }
+
+        void death()
+        {
+            SceneManager.LoadScene("death");
+        }
+        void Endeath()
+        {
+            SceneManager.LoadScene("Tutorial Scene");
+        }
+    
+
+}   
