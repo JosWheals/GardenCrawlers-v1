@@ -4,12 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Key
   - Door
-  - Healthbar
-  - PCHealth
-  - EnHealth
-  - Moves
-  - Infomation
+  - Weapon
   layers:
   - Default
   - TransparentFX
