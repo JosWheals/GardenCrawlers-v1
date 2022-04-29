@@ -21,29 +21,29 @@ public class Battleloop : MonoBehaviour
     private int Def;
     private int EnDamage;
     private int Speed;
-    private int EnSpeed;
     private int heal;
     private int TotalDamage;
     private int turnumber;
     private int RNG;
+    private int MoveRNG;
     private bool next;
     public GameObject Moves;
 
     // Start is called before the first frame update
     void Start()
-    {
-
+    {       
         RNG = Random.Range(1, 4);
+        //MoveRNG = Random.Range(1, 11);
         //PCHealth.text = "HP: " + CurrentHealth + "/" + MaxHealth;
         if (RNG == 1)
         {
             name = "Commander Carrot";
             EnTitle.text = name;
             EnMaxHealth = 20;
-            Def = 8;
             Enmove = "Barrage";
-            EnDamage = 6;
-            EnSpeed = 3;
+            Def = 8;
+            EnDamage = 12;
+         
         }
 
 
@@ -51,12 +51,11 @@ public class Battleloop : MonoBehaviour
         {
             name = "Olivander The Onion";
             EnTitle.text = name;
-            EnMaxHealth = 30;
+            EnMaxHealth = 40;            
+            Enmove = "Roll";
             Def = 10;
-            Enmove = "Bad Breath";
-            EnDamage = 3;
-            EnSpeed = 3;
-
+            EnDamage = 8;
+       
         }
 
 
@@ -65,10 +64,11 @@ public class Battleloop : MonoBehaviour
             name = "Randy Radish";
             EnTitle.text = name;
             EnMaxHealth = 10;
-            Def = 5;
             Enmove = "Head Butt";
+            Def = 5;
             EnDamage = 5;
-            EnSpeed = 10;
+
+
         }
 
         CurrentHealth = MaxHealth;
@@ -79,6 +79,8 @@ public class Battleloop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         next = false;
         PCHealth.text = "HP:" + CurrentHealth + "/" + MaxHealth;
         EnHealth.text = "HP: " + ENCurrentHealth + "/" + EnMaxHealth;
@@ -126,6 +128,7 @@ public class Battleloop : MonoBehaviour
     {
         if (move == 1)
         {
+            
             Debug.Log("Pitchfork");
             damage = 17;
             GameObject.FindWithTag("Moves").SetActiveRecursively(false);
@@ -148,6 +151,7 @@ public class Battleloop : MonoBehaviour
 
         if (move == 2)
         {
+            
             Debug.Log("Fertiliser");
             heal = 17;
             GameObject.FindWithTag("Moves").SetActiveRecursively(false);
@@ -156,11 +160,16 @@ public class Battleloop : MonoBehaviour
             {
                 CurrentHealth = CurrentHealth + heal;
             }
+            if (CurrentHealth > 30)
+            {
+                CurrentHealth = 30;
+            }
             StartCoroutine(WaitBeforNext());
         }
 
         if (move == 3)
         {
+            
             Debug.Log("Pesticide");
             damage = 15;
             GameObject.FindWithTag("Moves").SetActiveRecursively(false);
@@ -181,6 +190,7 @@ public class Battleloop : MonoBehaviour
 
         if (move == 4)
         {
+           
             Debug.Log("Punch");
             damage = 20;
             GameObject.FindWithTag("Moves").SetActiveRecursively(false);
@@ -203,7 +213,7 @@ public class Battleloop : MonoBehaviour
         void EnTurn()
         {
             MoveTitle.text = (name + " uses " + Enmove);
-            CurrentHealth = CurrentHealth - damage;
+            CurrentHealth = CurrentHealth - EnDamage;
             StartCoroutine(WaitBeforloop());
 
         }
@@ -214,7 +224,9 @@ public class Battleloop : MonoBehaviour
         }
         IEnumerator WaitBeforNext()
         {
+            
             yield return new WaitForSeconds(1);
+            MoveRNG = Random.Range(1, 11);
             EnTurn();
         }
 
@@ -242,6 +254,4 @@ public class Battleloop : MonoBehaviour
         {
             SceneManager.LoadScene("Tutorial Scene");
         }
-    
-
 }   
